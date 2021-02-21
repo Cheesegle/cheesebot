@@ -1,0 +1,20 @@
+{
+  "name": "combinebot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "deepai": "^1.0.17",
+    "discord.js": "^12.5.1",
+    "node-fetch": "^2.6.1",
+    "nutritionix": "^0.6.1",
+    "random-puppy": "^1.1.0",
+    "snekfetch": "^4.0.4"
+  }
+}
