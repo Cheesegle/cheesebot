@@ -12,8 +12,8 @@ function nutrition(message, prefix) {
   nutritionix.natural(arg).then(function(r) {
     let n = '```';
     for (var i = 0; i < r.total.nutrients.length; i++) {
-      if (Math.round(10000 * r.total.nutrients[i].value) / 10000 > 0) {
-        n += '\n' + r.total.nutrients[i].name + ': ' + Math.round(10000 * r.total.nutrients[i].value) / 10000 + r.total.nutrients[i].unit
+      if (Math.round(100 * r.total.nutrients[i].value) / 100 > 0) {
+        n += '\n' + r.total.nutrients[i].name + ': ' + Math.round(100 * r.total.nutrients[i].value) / 100 + r.total.nutrients[i].unit
       }
       if (i === r.total.nutrients.length - 1) {
         n += '\n```'
@@ -22,7 +22,7 @@ function nutrition(message, prefix) {
       }
     }
   })
-  .catch(err => message.channel.send('Item not found').catch(err => 1 + 1));
+    .catch(err => message.channel.send('Item not found').catch(err => 1 + 1));
 
 }
 

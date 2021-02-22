@@ -1,6 +1,7 @@
 const deepai = require('deepai');
 const educate = require('./educate.js');
-const neko = require('./neko.js');
+const nsfwneko = require('./nsfwneko.js');
+const sfwneko = require('./sfwneko.js');
 const nutrition = require('./nutrition.js');
 const Discord = require('discord.js');
 const client = new Discord.Client();
@@ -32,6 +33,7 @@ describei = async function(i) {
 
 client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}!`);
+  client.user.setActivity("c!help for my commands");
 });
 
 client.on('message', message => {
@@ -51,16 +53,33 @@ client.on('message', message => {
           message.channel.send('Error processing given input(s)');
         })
     }
+
     if (command === 'educate') {
-      educate.nuke(message);
+      if (message.channel.nsfw === true) {
+        educate.nuke(message);
+      } else {
+        message.channel.send('This command can only be run in a NSFW channel')
+      }
     }
 
-    if (command === 'neko') {
-      neko.neko(message);
+    if (command === 'nsfwneko') {
+      if (message.channel.nsfw === true) {
+        nsfwneko.neko(message);
+      } else {
+        message.channel.send('This command can only be run in a NSFW channel')
+      }
+    }
+
+    if (command === 'sfwneko') {
+      sfwneko.neko(message);
     }
 
     if (command === 'nutrition') {
       nutrition.nutrition(message, prefix, args);
+    }
+
+    if (command === 'invite') {
+      message.channel.send('Invite this bot to your sever with this link:\nhttps://discord.com/api/oauth2/authorize?client_id=784946150179864628&permissions=34816&scope=bot');
     }
 
     if (command === 'generate') {
@@ -96,9 +115,12 @@ client.on('message', message => {
 c!combine [style image link] [content image link]
 c!generate [description]
 c!describe [image url]
-c!educate [victim]
-c!neko
 c!nutrition [item]
+c!invite
+c!sfwneko
+NSFW COMMANDS:
+c!educate [victim]
+c!nsfwneko
 \`\`\``);
     }
   }
