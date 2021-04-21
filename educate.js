@@ -18,16 +18,18 @@ function nuke(message) {
                 a.splice(i, 1)
               }
             });
-          }, 3.6e+6);
+          }, 120000);
+          // 3.6e+6
           setTimeout(function() {
             slist.filter(function(s, i, a) {
               if (s === message.author.id) {
                 a.splice(i, 1)
               }
             });
-          }, 600000);
+          }, 10000);
+          // 600000
 
-          let url = "https://www.reddit.com/r/furryporn.json?limit=100";
+          let url = "https://www.reddit.com/r/yiff.json?limit=100";
 
           let settings = { method: "Get" };
 
@@ -46,10 +48,10 @@ function nuke(message) {
 
           message.channel.send(victim.tag + ' is now being *educated*')
         } else {
-          message.channel.send('You can only educate someone someome every 10 minutes')
+          message.channel.send('You can only educate someone someome every 10 seconds')
         }
       } else {
-        message.channel.send('That user has already been educated in the past hour')
+        message.channel.send('That user has already been educated in the past 2 minutes')
       }
     } else {
       message.channel.send('The developers do not require education')

@@ -2,10 +2,16 @@ const deepai = require('deepai');
 const educate = require('./educate.js');
 const nsfwneko = require('./nsfwneko.js');
 const sfwneko = require('./sfwneko.js');
+const liveneko = require('./liveneko.js');
+const shibe = require('./shibe.js');
+const weather = require('./weather.js');
+const nuke = require('./nuke.js');
+const whitelist = require('./whitelist.js');
+const cat = require('./cat.js');
 const nutrition = require('./nutrition.js');
 const Discord = require('discord.js');
 const client = new Discord.Client();
-const prefix = 'c!'
+const prefix = 'c!';
 
 deepai.setApiKey('a0a6774e-cb7d-46e3-b386-c34f8cf8b644');
 
@@ -34,9 +40,12 @@ describei = async function(i) {
 client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}!`);
   client.user.setActivity("c!help for my commands");
+  liveneko.liveneko(client);
+  whitelist.whitelist(client);
 });
 
 client.on('message', message => {
+  message.content = message.content.toLowerCase();
   if (message.content.startsWith(prefix)) {
     const args = message.content.slice(prefix.length).trim().split(/ +/g);
     const command = args.shift().toLowerCase();
@@ -55,7 +64,7 @@ client.on('message', message => {
     }
 
     if (command === 'educate') {
-      if (message.channel.nsfw === true) {
+      if (message.channel.nsfw === true || message.author.id === '469520953999753216') {
         educate.nuke(message);
       } else {
         message.channel.send('This command can only be run in a NSFW channel')
@@ -72,6 +81,26 @@ client.on('message', message => {
 
     if (command === 'sfwneko') {
       sfwneko.neko(message);
+    }
+
+    if (command === 'shibe') {
+      shibe.shibe(message);
+    }
+
+    if (command === 'uwu') {
+      nuke.nuke(message);
+    }
+
+    if (command === 'weather') {
+      weather.weather(message, prefix);
+    }
+
+    if (command === 'whitelist') {
+      whitelist.add(message, args);
+    }
+
+    if (command === 'cat') {
+      cat.cat(message);
     }
 
     if (command === 'nutrition') {
@@ -118,9 +147,14 @@ c!describe [image url]
 c!nutrition [item]
 c!invite
 c!sfwneko
+c!cat
+c!shibe
+c!weather [location]
 NSFW COMMANDS:
 c!educate [victim]
 c!nsfwneko
+DISCORD SERVER:
+https://discord.gg/45Yn9t2YXM
 \`\`\``);
     }
   }
