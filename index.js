@@ -9,6 +9,7 @@ const nuke = require('./nuke.js');
 const whitelist = require('./whitelist.js');
 const cat = require('./cat.js');
 const nutrition = require('./nutrition.js');
+const jaidenanimationr34 = require('./jaidenanimationr34.js')
 const Discord = require('discord.js');
 const client = new Discord.Client();
 const prefix = 'c!';
@@ -95,6 +96,14 @@ client.on('message', message => {
       weather.weather(message, prefix);
     }
 
+    if (command === 'jaidenanimationr34') {
+      if (message.channel.nsfw) {
+        jaidenanimationr34.jaidenanimationr34(message);
+      } else {
+        message.channel.send('This command can only be run in a NSFW channel')
+      }
+    }
+
     if (command === 'whitelist') {
       whitelist.add(message, args);
     }
@@ -140,24 +149,27 @@ client.on('message', message => {
     }
 
     if (command === 'help') {
-      message.channel.send(`My commands are: \`\`\`
-c!combine [style image link] [content image link]
-c!generate [description]
-c!describe [image url]
-c!nutrition [item]
-c!invite
-c!sfwneko
-c!cat
-c!shibe
-c!weather [location]
-NSFW COMMANDS:
-c!educate [victim]
-c!nsfwneko
-DISCORD SERVER:
-https://discord.gg/45Yn9t2YXM
-\`\`\``);
+      let embed = new Discord.MessageEmbed()
+        .setTitle("CheeseBot Commands")
+        .setColor('#0000ff')
+        .setDescription("Cheese Bot Commands")
+        .addField("c!combine [Style Img link] [Content Img link]", "Combines two images.")
+        .addField("c!generate [description]", "Generates anything (shit AI)")
+        .addField("c!describe [Image URL]", "It describes the image you send")
+        .addField("c!nutrition [item]", "Nutrition information")
+        .addField("c!invite", "Link to invite this bot to your server")
+        .addField("c!sfwneko", "SFW Neko")
+        .addField("c!cat", "Self explanitory")
+        .addField("c!shibe", "Sends images of shibes")
+        .addField("c!weather [Location]", "Gives you the weather of a location")
+        .addField("c!educate [victim] (NSFW)", "Sends them images...")
+        .addField("c!nsfwneko (NSFW)", "c!sfwneko but its NSFW")
+        .addField("c!jaidenanimationr34 (NSFW)", "...")
+        .addField("SERVER: ", "https://discord.gg/45Yn9t2YXM")
+
+      message.channel.send(embed);
     }
   }
 });
 
-client.login('Nzg0OTQ2MTUwMTc5ODY0NjI4.X8wsEQ.89TcXBdC0WVqelDRYaGv9ApvoYM');
+client.login(process.env.TOKEN);

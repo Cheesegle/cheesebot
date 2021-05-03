@@ -16,7 +16,7 @@ function whitelist(client, args) {
     if (member.guild.id === '752138183814283325') {
       if (list.includes(member.id) === true) {
         list.remove(member.id);
-        client.channels.cache.get("752144200551891165").send('Welcome to Dredanarchy, <@' + member.id + '>');
+        client.channels.cache.get("752144200551891165").send('Welcome, <@' + member.id + '>');
       } else {
         member.ban({ reason: 'Not whitelisted' });
         client.channels.cache.get("752144200551891165").send(member.user.tag + ' has been automatically banned. (not whitelisted)');
@@ -29,7 +29,7 @@ function add(message, args) {
   if (message.author.id === '469520953999753216') {
     list.push(args[0]);
     message.guild.members.unban(args[0]).catch(err => 1 + 1)
-    message.channel.send('Whitelisted ' + args[0] + ', expires in 10 minutes.');
+    message.channel.send('Whitelisted ' + args[0] + ',they have 10 minutes to join.');
     setTimeout(function() {
       list.shift();
     }, 60000);

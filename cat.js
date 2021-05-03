@@ -22,7 +22,6 @@ function cat(message) {
             var lines = data.toString().split('\n');
             message.channel.send(lines[Math.floor(Math.random() * lines.length)], { files: [c[Math.floor(Math.random() * c.length)]] }).catch(err => 1 + 1);
           })
-
         }
       }
     })
