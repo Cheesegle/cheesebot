@@ -14,7 +14,7 @@ const Discord = require('discord.js');
 const client = new Discord.Client();
 const prefix = 'c!';
 
-deepai.setApiKey('a0a6774e-cb7d-46e3-b386-c34f8cf8b644');
+deepai.setApiKey(process.env.APIKEY);
 
 imgc = async function(s, c) {
   var resp = await deepai.callStandardApi("neural-style", {
