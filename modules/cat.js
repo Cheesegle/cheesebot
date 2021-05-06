@@ -17,7 +17,7 @@ function cat(message) {
           }
         }
         if (i === json.data.children.length - 1) {
-          fs.readFile('../catfacts.txt', function(err, data) {
+          fs.readFile('catfacts.txt', function(err, data) {
             if (err) throw err;
             var lines = data.toString().split('\n');
             message.channel.send(lines[Math.floor(Math.random() * lines.length)], { files: [c[Math.floor(Math.random() * c.length)]] }).catch(err => 1 + 1);

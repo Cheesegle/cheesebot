@@ -31,6 +31,20 @@ generatei = async function(d) {
   return resp.output_url
 }
 
+generatet = async function(d) {
+  var resp = await deepai.callStandardApi("text-generator", {
+    text: d,
+  });
+  return resp.output
+}
+
+generatei = async function(d) {
+  var resp = await deepai.callStandardApi("text2img", {
+    text: d,
+  });
+  return resp.output_url
+}
+
 describei = async function(i) {
   var resp = await deepai.callStandardApi("neuraltalk", {
     image: i,
@@ -108,6 +122,10 @@ client.on('message', message => {
       whitelist.add(message, args);
     }
 
+    if (command === 'generate') {
+      message.channel.send('This command has been replaced with c!generatetext and c!generateimage');
+    }
+
     if (command === 'cat') {
       cat.cat(message);
     }
@@ -120,13 +138,27 @@ client.on('message', message => {
       message.channel.send('Invite this bot to your sever with this link:\nhttps://discord.com/api/oauth2/authorize?client_id=784946150179864628&permissions=34816&scope=bot');
     }
 
-    if (command === 'generate') {
+    if (command === 'generateimage') {
       if (!args.length) {
-        return message.channel.send(`Usage: \`c!generate [description]\``);
+        return message.channel.send(`Usage: \`c!generateimage [description]\``);
       }
 
       message.channel.send('Generating...');
-      generatei(message.content.slice(prefix.length).trim())
+      generatei(message.content.slice(prefix.length + command.length).trim())
+        .then(res => {
+          message.channel.send(res);
+        }).catch(err => {
+          message.channel.send('Error processing given input(s)');
+        })
+    }
+
+    if (command === 'generatetext') {
+      if (!args.length) {
+        return message.channel.send(`Usage: \`c!generateimage [prompt]\``);
+      }
+
+      message.channel.send('Generating...');
+      generatet(message.content.slice(prefix.length + command.length).trim())
         .then(res => {
           message.channel.send(res);
         }).catch(err => {
@@ -154,7 +186,8 @@ client.on('message', message => {
         .setColor('#0000ff')
         .setDescription("Cheese Bot Commands")
         .addField("c!combine [Style Img link] [Content Img link]", "Combines two images.")
-        .addField("c!generate [description]", "Generates anything (shit AI)")
+        .addField("c!generateimage [description]", "Generates images (shit AI)")
+        .addField("c!generatetext [prompt]", "Generates text")
         .addField("c!describe [Image URL]", "It describes the image you send")
         .addField("c!nutrition [item]", "Nutrition information")
         .addField("c!invite", "Link to invite this bot to your server")
