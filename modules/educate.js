@@ -29,7 +29,7 @@ function nuke(message) {
           }, 10000);
           // 600000
 
-          let url = "https://www.reddit.com/r/yiff.json?limit=100";
+          let url = "https://www.reddit.com/r/puppies/.json?limit=100";
 
           let settings = { method: "Get" };
 
