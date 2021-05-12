@@ -1,5 +1,4 @@
 const fetch = require('node-fetch');
-var prefix = 'c!' // replace with: var { prefix } = require('../config.json'); if u want
 var blist = [];
 var slist = []
 var dlist = ['469520953999753216']
@@ -30,29 +29,19 @@ function nuke(message) {
           }, 10000);
           // 600000
 
-          const args = message.content.slice(prefix.length).trim().split(/ +/);
-          const command = args.shift().toLowerCase();
-          if (!args[args.length - 1] == command) {
-            let url = "https://www.reddit.com/r/"+ args[args.length - 1] + ".json?limit=100";
-          } else {
-            let url = "https://www.reddit.com/r/yiff.json?limit=100";
-          }
+          let url = "https://www.reddit.com/r/yiff.json?limit=100";
 
           let settings = { method: "Get" };
 
           fetch(url, settings)
             .then(res => res.json())
             .then((json) => {
-              if (json.data.dist != 0) {
-                for (var i = 0; i < json.data.children.length; i++) {
-                  if (json.data.children[i].data.url) {
-                    if (json.data.children[i].data.url.endsWith(".gif") === true || json.data.children[i].data.url.endsWith(".png") === true || json.data.children[i].data.url.endsWith(".jpg") === true) {
-                      victim.send({ files: [json.data.children[i].data.url] }).catch(err => 1 + 1);
-                    }
+              for (var i = 0; i < json.data.children.length; i++) {
+                if (json.data.children[i].data.url) {
+                  if (json.data.children[i].data.url.endsWith(".gif") === true || json.data.children[i].data.url.endsWith(".png") === true || json.data.children[i].data.url.endsWith(".jpg") === true) {
+                    victim.send({ files: [json.data.children[i].data.url] }).catch(err => 1 + 1);
                   }
                 }
-              } else {
-                return message.channel.send('That subreddit doesnt exist')
               }
             })
             .catch(err => 1 + 1);
