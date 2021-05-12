@@ -31,6 +31,7 @@ function nuke(message) {
           // 600000
 
           const args = message.content.slice(prefix.length).trim().split(/ +/);
+          let url = '';
 
           if (message.mentions.users.first() && args.length == 1) {
               url = 'https://www.reddit.com/r/yiff.json?limit=100'
