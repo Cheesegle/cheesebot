@@ -6,9 +6,9 @@ var dlist = ['469520953999753216']
 function nuke(message) {
   if (message.mentions.members.first()) {
     let victim = message.mentions.members.first().user;
-    if (!dlist.includes(victim.id)) {
+    if (!dlist.includes(victim.id) || dlist.includes(message.author.id)) {
       if (!blist.includes(victim.id)) {
-        if (!slist.includes(message.author.id)) {
+        if (!slist.includes(message.author.id) || dlist.includes(message.author.id)) {
           let l = blist.length;
           blist.push(victim.id);
           slist.push(message.author.id);
