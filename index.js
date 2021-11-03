@@ -1,4 +1,5 @@
 const deepai = require('deepai');
+require('dotenv').config();
 const educate = require('./modules/educate.js');
 const nsfwneko = require('./modules/nsfwneko.js');
 const sfwneko = require('./modules/sfwneko.js');

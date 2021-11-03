@@ -11,11 +11,12 @@
     "get-random-emoji": "^1.0.0",
     "node-fetch": "^2.6.1",
     "nutritionix": "^0.6.1",
-    "weather-js": "^2.0.0"
+    "weather-js": "^2.0.0",
+    "dotenv": "latest"
   },
   "devDependencies": {},
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node index.js"
   },
   "repository": {
     "type": "git",
